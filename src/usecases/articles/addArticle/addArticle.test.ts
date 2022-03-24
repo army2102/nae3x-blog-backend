@@ -24,6 +24,11 @@ describe('Test AddArticle', () => {
         content: 'This is a content'
       })
 
+      expect(articleRepository.add).toBeCalledWith(
+        'This is a title',
+        'This is a thumbnail',
+        'This is a content'
+      )
       expect(actual).toStrictEqual(expected)
     })
   })

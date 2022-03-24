@@ -76,6 +76,7 @@ describe('Test getArticleList', () => {
         offset: 0
       })
 
+      expect(articleRepository.findMany).toBeCalledWith(5, 0)
       expect(actual).toEqual(expected)
     })
   })
