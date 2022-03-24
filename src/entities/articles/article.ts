@@ -7,7 +7,11 @@ class Article implements Entity {
   public createdAt: Date
   public updatedAt: Date
 
-  constructor(public content: string, public title: string) {
+  constructor(
+    public content: string,
+    public title: string,
+    public thumbnail: string
+  ) {
     this.id = uuidv4()
     this.createdAt = new Date()
     this.updatedAt = new Date()

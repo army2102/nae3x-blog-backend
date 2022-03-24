@@ -19,11 +19,11 @@ class GetArticleList implements GetArticleListInterface {
     )
 
     const formattedArticles = articles.map(
-      ({ id, title, content, createdAt }) => {
+      ({ id, title, thumbnail, createdAt }) => {
         return {
           id,
           title,
-          content,
+          thumbnail,
           createdAt
         }
       }

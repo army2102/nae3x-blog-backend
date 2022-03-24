@@ -16,6 +16,7 @@ describe('Test getArticleList', () => {
             id: '1',
             title: 'This is a title',
             content: 'This is a content',
+            thumbnail: 'This is a thumbnail',
             createdAt: '2022-03-18T08:45:21.963Z',
             updatedAt: '2022-03-18T09:00:00.000Z'
           },
@@ -23,6 +24,7 @@ describe('Test getArticleList', () => {
             id: '2',
             title: 'This is a title',
             content: 'This is a content',
+            thumbnail: 'This is a thumbnail',
             createdAt: '2022-03-18T08:45:21.963Z',
             updatedAt: '2022-03-18T09:00:00.000Z'
           },
@@ -30,6 +32,7 @@ describe('Test getArticleList', () => {
             id: '3',
             title: 'This is a title',
             content: 'This is a content',
+            thumbnail: 'This is a thumbnail',
             createdAt: '2022-03-18T08:45:21.963Z',
             updatedAt: '2022-03-18T09:00:00.000Z'
           },
@@ -37,6 +40,7 @@ describe('Test getArticleList', () => {
             id: '4',
             title: 'This is a title',
             content: 'This is a content',
+            thumbnail: 'This is a thumbnail',
             createdAt: '2022-03-18T08:45:21.963Z',
             updatedAt: '2022-03-18T09:00:00.000Z'
           },
@@ -44,6 +48,7 @@ describe('Test getArticleList', () => {
             id: '5',
             title: 'This is a title',
             content: 'This is a content',
+            thumbnail: 'This is a thumbnail',
             createdAt: '2022-03-18T08:45:21.963Z',
             updatedAt: '2022-03-18T09:00:00.000Z'
           }
@@ -55,11 +60,11 @@ describe('Test getArticleList', () => {
 
       const expected = {
         articles: mockFindResult.articles.map(
-          ({ id, title, content, createdAt }) => {
+          ({ id, title, thumbnail, createdAt }) => {
             return {
               id,
               title,
-              content,
+              thumbnail,
               createdAt
             }
           }
