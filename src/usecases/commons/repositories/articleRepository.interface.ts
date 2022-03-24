@@ -6,6 +6,8 @@ interface ArticleRepositoryInterface {
     offset: number
   ): Promise<{ articles: Article[]; total: number }>
 
+  findOne(id: string): Promise<Article>
+
   add(title: string, thumbnail: string, content: string): Promise<string>
 
   update(
