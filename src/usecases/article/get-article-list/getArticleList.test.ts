@@ -1,11 +1,11 @@
 import { GetArticleList } from './getArticleList.impl'
-import { ArticleRepository } from './getArticleList.interface'
+import { ArticleRepositoryInterface } from './getArticleList.interface'
 
 describe('Test getArticleList', () => {
-  let articleRepository: ArticleRepository
+  let articleRepository: ArticleRepositoryInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn() as unknown as ArticleRepository
+    articleRepository = jest.fn() as unknown as ArticleRepositoryInterface
   })
 
   it('Should return output correctly', async () => {

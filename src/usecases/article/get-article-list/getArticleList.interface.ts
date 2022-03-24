@@ -19,7 +19,7 @@ interface GetArticleListInterface {
   execute(input: GetArticleListInput): Promise<GetArticleListOutput>
 }
 
-interface ArticleRepository {
+interface ArticleRepositoryInterface {
   findMany(
     limit: number,
     offset: number
@@ -30,5 +30,5 @@ export {
   GetArticleListInterface,
   GetArticleListInput,
   GetArticleListOutput,
-  ArticleRepository
+  ArticleRepositoryInterface
 }

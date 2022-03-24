@@ -1,12 +1,12 @@
 import {
-  ArticleRepository,
+  ArticleRepositoryInterface,
   GetArticleListInput,
   GetArticleListInterface,
   GetArticleListOutput
 } from './getArticleList.interface'
 
 class GetArticleList implements GetArticleListInterface {
-  constructor(private readonly articleRepository: ArticleRepository) {}
+  constructor(private readonly articleRepository: ArticleRepositoryInterface) {}
 
   public async execute(
     input: GetArticleListInput
