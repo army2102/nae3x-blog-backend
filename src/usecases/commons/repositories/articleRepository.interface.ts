@@ -6,7 +6,16 @@ interface ArticleRepositoryInterface {
     offset: number
   ): Promise<{ articles: Article[]; total: number }>
 
-  add(title: string, content: string): Promise<string>
+  add(title: string, thumbnail: string, content: string): Promise<string>
+
+  update(
+    id: string,
+    updateData: {
+      title?: string
+      content?: string
+      thumbnail?: string
+    }
+  ): Promise<Article>
 }
 
 export { ArticleRepositoryInterface }
