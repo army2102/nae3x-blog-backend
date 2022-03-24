@@ -1,5 +1,6 @@
 interface AddArticleInput {
   title: string
+  thumbnail: string
   content: string
 }
 

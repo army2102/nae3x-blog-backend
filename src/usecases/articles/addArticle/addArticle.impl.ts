@@ -9,9 +9,13 @@ class AddArticle implements AddArticleInterface {
   constructor(private readonly articleRepository: ArticleRepositoryInterface) {}
 
   public async execute(input: AddArticleInput): Promise<AddArticleOutput> {
-    const { title, content } = input
+    const { title, thumbnail, content } = input
 
-    const articleId = await this.articleRepository.add(title, content)
+    const articleId = await this.articleRepository.add(
+      title,
+      thumbnail,
+      content
+    )
 
     return {
       id: articleId

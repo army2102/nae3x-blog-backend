@@ -20,6 +20,7 @@ describe('Test AddArticle', () => {
       }
       const actual = await useCase.execute({
         title: 'This is a title',
+        thumbnail: 'This is a thumbnail',
         content: 'This is a content'
       })
 
