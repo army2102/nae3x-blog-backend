@@ -18,6 +18,8 @@ interface ArticleRepositoryInterface {
       thumbnail?: string
     }
   ): Promise<Article>
+
+  delete(id: string): Promise<void>
 }
 
 export { ArticleRepositoryInterface }
