@@ -1,5 +1,5 @@
-import { Article } from '@/entities/article/article'
-import { ArticleRepositoryInterface } from '@/usecases/article/getArticleList/getArticleList.interface'
+import { Article } from '@/entities/articles/article'
+import { ArticleRepositoryInterface } from '@/usecases/articles/getArticleList/getArticleList.interface'
 
 class ArticleRepository implements ArticleRepositoryInterface {
   constructor() {}

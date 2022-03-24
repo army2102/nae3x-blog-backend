@@ -1,4 +1,4 @@
-import { Article } from '@/entities/article/article'
+import { Article } from '@/entities/articles/article'
 
 interface GetArticleListInput {
   limit: number
