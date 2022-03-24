@@ -1,5 +1,3 @@
-import { Article } from '@/entities/articles/article'
-
 interface GetArticleListInput {
   limit: number
   offset: number
@@ -19,16 +17,4 @@ interface GetArticleListInterface {
   execute(input: GetArticleListInput): Promise<GetArticleListOutput>
 }
 
-interface ArticleRepositoryInterface {
-  findMany(
-    limit: number,
-    offset: number
-  ): Promise<{ articles: Article[]; total: number }>
-}
-
-export {
-  GetArticleListInterface,
-  GetArticleListInput,
-  GetArticleListOutput,
-  ArticleRepositoryInterface
-}
+export { GetArticleListInterface, GetArticleListInput, GetArticleListOutput }

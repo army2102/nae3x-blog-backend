@@ -1,5 +1,5 @@
+import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
 import { GetArticleList } from './getArticleList.impl'
-import { ArticleRepositoryInterface } from './getArticleList.interface'
 
 describe('Test getArticleList', () => {
   let articleRepository: ArticleRepositoryInterface

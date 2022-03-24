@@ -1,5 +1,5 @@
+import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
 import {
-  ArticleRepositoryInterface,
   GetArticleListInput,
   GetArticleListInterface,
   GetArticleListOutput
