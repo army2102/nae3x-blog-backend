@@ -10,7 +10,14 @@ interface UpdateArticleInput {
 }
 
 interface UpdateArticleOutput {
-  article: Article
+  article: {
+    id: string
+    title: string
+    thumbnail: string
+    content: string
+    updatedAt: Date
+    createdAt: Date
+  }
 }
 
 interface UpdateArticleInterface {
