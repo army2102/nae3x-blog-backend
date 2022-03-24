@@ -1,5 +1,5 @@
 import { Article } from '@/entities/articles/article'
-import { ArticleRepositoryInterface } from '@/usecases/articles/getArticleList/getArticleList.interface'
+import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
 
 class ArticleRepository implements ArticleRepositoryInterface {
   constructor() {}
@@ -8,6 +8,10 @@ class ArticleRepository implements ArticleRepositoryInterface {
     limit: number,
     offset: number
   ): Promise<{ articles: Article[]; total: number }> {
+    throw new Error('Not Implement')
+  }
+
+  public async add(title: string, content: string): Promise<string> {
     throw new Error('Not Implement')
   }
 }
