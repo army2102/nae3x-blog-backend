@@ -4,10 +4,10 @@ import { Entity } from '@/entities/commons/entity.interface'
 
 class Article implements Entity {
   public readonly id: string
-  private createdAt: Date
-  private updatedAt: Date
+  public createdAt: Date
+  public updatedAt: Date
 
-  constructor(private content: string) {
+  constructor(public content: string, public title: string) {
     this.id = uuidv4()
     this.createdAt = new Date()
     this.updatedAt = new Date()
