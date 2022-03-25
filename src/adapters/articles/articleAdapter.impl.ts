@@ -1,9 +1,10 @@
-import { Article } from '@/entities/articles/article'
+import { Collection, ObjectId, WithId } from 'mongodb'
+
+import { Article } from '@/entities/articles/articleEntity.impl'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
-import { Collection, ObjectId } from 'mongodb'
 
 class ArticleAdapter implements ArticleAdapterInterface {
-  constructor(private readonly mongoCollection: Collection) {}
+  constructor(private readonly mongoCollection: Collection<WithId<Article>>) {}
 
   public async findMany(
     limit: number,
@@ -13,12 +14,34 @@ class ArticleAdapter implements ArticleAdapterInterface {
   }
 
   public async findOne(id: string): Promise<Article> {
-    throw new Error('Not Implement')
+    const findResult = await this.mongoCollection.findOne({ id })
+
+    if (!findResult) {
+      throw new Error(`Error cannot find article with id: ${id}`)
+    }
+
+    const {
+      id: articleId,
+      title,
+      content,
+      thumbnail,
+      updatedAt,
+      createdAt
+    } = findResult
+    return new Article({
+      id: articleId,
+      title,
+      content,
+      thumbnail,
+      updatedAt,
+      createdAt
+    })
   }
 
   public async insert(article: Article): Promise<void> {
     const { id, title, content, thumbnail, createdAt, updatedAt } = article
     await this.mongoCollection.insertOne({
+      _id: new ObjectId(),
       id,
       title,
       content,
