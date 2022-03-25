@@ -1,20 +1,23 @@
-import { Article } from '@/entities/articles/article'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
   CreateArticleInput,
   CreateArticleInterface,
   CreateArticleOutput
 } from './createArticle.interface'
+import { ArticleFactoryInterface } from './factory/articleFactory.interface'
 
 class CreateArticle implements CreateArticleInterface {
-  constructor(private readonly articleAdapter: ArticleAdapterInterface) {}
+  constructor(
+    private readonly articleFactory: ArticleFactoryInterface,
+    private readonly articleAdapter: ArticleAdapterInterface
+  ) {}
 
   public async execute(
     input: CreateArticleInput
   ): Promise<CreateArticleOutput> {
     const { title, thumbnail, content } = input
 
-    const article = new Article(content, title, thumbnail)
+    const article = this.articleFactory.create(title, content, thumbnail)
 
     await this.articleAdapter.insert(article)
 
