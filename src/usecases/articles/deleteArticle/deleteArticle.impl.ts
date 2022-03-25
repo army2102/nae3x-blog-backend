@@ -10,7 +10,7 @@ class DeleteArticle implements DeleteArticleInterface {
   public async execute(input: DeleteArticleInput): Promise<void> {
     const { id } = input
 
-    await this.articleAdapter.delete(id)
+    await this.articleAdapter.deleteOne(id)
   }
 }
 

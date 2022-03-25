@@ -26,4 +26,15 @@ describe('Test ArticleAdapter', () => {
       expect(mongoConnection.insertOne).toBeCalledWith(article)
     })
   })
+
+  describe('Test deleteOne', () => {
+    it('Should delete article', async () => {
+      mongoConnection.deleteOne = jest.fn()
+      const adapter = new ArticleAdapter(mongoConnection)
+
+      await adapter.deleteOne('1')
+
+      expect(mongoConnection.deleteOne).toBeCalledWith({ id: '1' })
+    })
+  })
 })

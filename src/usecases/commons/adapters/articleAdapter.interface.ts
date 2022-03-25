@@ -19,7 +19,7 @@ interface ArticleAdapterInterface {
     }
   ): Promise<Article>
 
-  delete(id: string): Promise<void>
+  deleteOne(id: string): Promise<void>
 }
 
 export { ArticleAdapterInterface }

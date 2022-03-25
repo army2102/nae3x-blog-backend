@@ -39,8 +39,8 @@ class ArticleAdapter implements ArticleAdapterInterface {
     throw new Error('Not Implement')
   }
 
-  public async delete(id: string): Promise<void> {
-    throw new Error('Not Implement')
+  public async deleteOne(id: string): Promise<void> {
+    await this.mongoCollection.deleteOne({ id })
   }
 }
 

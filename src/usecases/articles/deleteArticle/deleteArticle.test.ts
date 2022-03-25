@@ -10,12 +10,12 @@ describe('Test DeleteArticle', () => {
 
   describe('Test execute', () => {
     it('Should delete Article correctly', async () => {
-      articleAdapter.delete = jest.fn()
+      articleAdapter.deleteOne = jest.fn()
       const useCase = new DeleteArticle(articleAdapter)
 
       await useCase.execute({ id: '1' })
 
-      expect(articleAdapter.delete).toBeCalledWith('1')
+      expect(articleAdapter.deleteOne).toBeCalledWith('1')
     })
   })
 })
