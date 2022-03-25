@@ -1,4 +1,3 @@
-import { Article } from '@/entities/articles/article'
 import { Collection } from 'mongodb'
 import { ArticleAdapter } from './articleAdapter.impl'
 
