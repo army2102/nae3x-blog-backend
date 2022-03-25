@@ -1,7 +1,7 @@
 import { Article } from '@/entities/articles/article'
-import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 
-class ArticleRepository implements ArticleRepositoryInterface {
+class ArticleAdapter implements ArticleAdapterInterface {
   constructor() {}
 
   public async findMany(
@@ -34,3 +34,5 @@ class ArticleRepository implements ArticleRepositoryInterface {
     throw new Error('Not Implement')
   }
 }
+
+export { ArticleAdapter }

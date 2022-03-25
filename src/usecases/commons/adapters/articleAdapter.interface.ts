@@ -1,6 +1,6 @@
 import { Article } from '@/entities/articles/article'
 
-interface ArticleRepositoryInterface {
+interface ArticleAdapterInterface {
   findMany(
     limit: number,
     offset: number
@@ -22,4 +22,4 @@ interface ArticleRepositoryInterface {
   delete(id: string): Promise<void>
 }
 
-export { ArticleRepositoryInterface }
+export { ArticleAdapterInterface }

@@ -1,4 +1,4 @@
-import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
 import {
   GetArticleDetailInput,
   GetArticleDetailInterface,
@@ -6,7 +6,7 @@ import {
 } from './getArticleDetail.interface'
 
 class GetArticleDetail implements GetArticleDetailInterface {
-  constructor(private readonly articleRepository: ArticleRepositoryInterface) {}
+  constructor(private readonly articleRepository: ArticleAdapterInterface) {}
 
   public async execute(
     input: GetArticleDetailInput

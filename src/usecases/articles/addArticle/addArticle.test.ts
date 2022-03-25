@@ -1,11 +1,11 @@
-import { ArticleRepositoryInterface } from '@/usecases/commons/repositories/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
 import { AddArticle } from './addArticle.impl'
 
 describe('Test AddArticle', () => {
-  let articleRepository: ArticleRepositoryInterface
+  let articleRepository: ArticleAdapterInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn as unknown as ArticleRepositoryInterface
+    articleRepository = jest.fn as unknown as ArticleAdapterInterface
   })
 
   describe('Test execute', () => {
