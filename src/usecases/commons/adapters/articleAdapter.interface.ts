@@ -8,7 +8,7 @@ interface ArticleAdapterInterface {
 
   findOne(id: string): Promise<Article>
 
-  add(title: string, thumbnail: string, content: string): Promise<string>
+  insert(article: Article): Promise<void>
 
   update(
     id: string,

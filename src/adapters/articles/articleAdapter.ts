@@ -15,7 +15,7 @@ class ArticleAdapter implements ArticleAdapterInterface {
     throw new Error('Not Implement')
   }
 
-  public async add(title: string, content: string): Promise<string> {
+  public async insert(article: Article): Promise<void> {
     throw new Error('Not Implement')
   }
 
