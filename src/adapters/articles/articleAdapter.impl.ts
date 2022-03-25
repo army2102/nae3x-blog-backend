@@ -1,8 +1,9 @@
 import { Article } from '@/entities/articles/article'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
+import { Collection, ObjectId } from 'mongodb'
 
 class ArticleAdapter implements ArticleAdapterInterface {
-  constructor() {}
+  constructor(private readonly mongoCollection: Collection) {}
 
   public async findMany(
     limit: number,
@@ -16,7 +17,15 @@ class ArticleAdapter implements ArticleAdapterInterface {
   }
 
   public async insert(article: Article): Promise<void> {
-    throw new Error('Not Implement')
+    const { id, title, content, thumbnail, createdAt, updatedAt } = article
+    await this.mongoCollection.insertOne({
+      id,
+      title,
+      content,
+      thumbnail,
+      createdAt,
+      updatedAt
+    })
   }
 
   public async update(
