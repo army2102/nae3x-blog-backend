@@ -4,7 +4,7 @@
   "description": "my personal blog",
   "main": "./src/index.js",
   "scripts": {
-    "build": "npm run clean && ttsc -P ./tsconfig.json",
+    "build": "npm run clean && ttsc -P ./tsconfig.build.json",
     "clean": "rimraf dist/",
     "test": "jest --coverage"
   },
@@ -22,6 +22,7 @@
     "typescript": "4.4.2"
   },
   "dependencies": {
+    "mongodb": "^4.4.1",
     "uuid": "^8.3.2"
   }
 }
