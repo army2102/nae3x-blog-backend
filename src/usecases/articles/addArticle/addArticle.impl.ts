@@ -1,4 +1,4 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
   AddArticleInput,
   AddArticleInterface,
@@ -6,16 +6,12 @@ import {
 } from './addArticle.interface'
 
 class AddArticle implements AddArticleInterface {
-  constructor(private readonly articleRepository: ArticleAdapterInterface) {}
+  constructor(private readonly articleAdapter: ArticleAdapterInterface) {}
 
   public async execute(input: AddArticleInput): Promise<AddArticleOutput> {
     const { title, thumbnail, content } = input
 
-    const articleId = await this.articleRepository.add(
-      title,
-      thumbnail,
-      content
-    )
+    const articleId = await this.articleAdapter.add(title, thumbnail, content)
 
     return {
       id: articleId

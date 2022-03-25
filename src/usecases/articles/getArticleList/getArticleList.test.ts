@@ -1,11 +1,11 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import { GetArticleList } from './getArticleList.impl'
 
 describe('Test getArticleList', () => {
-  let articleRepository: ArticleAdapterInterface
+  let articleAdapter: ArticleAdapterInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn() as unknown as ArticleAdapterInterface
+    articleAdapter = jest.fn() as unknown as ArticleAdapterInterface
   })
 
   describe('Test execute', () => {
@@ -55,8 +55,8 @@ describe('Test getArticleList', () => {
         ],
         total: 10
       }
-      articleRepository.findMany = jest.fn().mockResolvedValue(mockFindResult)
-      const useCase = new GetArticleList(articleRepository)
+      articleAdapter.findMany = jest.fn().mockResolvedValue(mockFindResult)
+      const useCase = new GetArticleList(articleAdapter)
 
       const expected = {
         articles: mockFindResult.articles.map(
@@ -76,7 +76,7 @@ describe('Test getArticleList', () => {
         offset: 0
       })
 
-      expect(articleRepository.findMany).toBeCalledWith(5, 0)
+      expect(articleAdapter.findMany).toBeCalledWith(5, 0)
       expect(actual).toEqual(expected)
     })
   })

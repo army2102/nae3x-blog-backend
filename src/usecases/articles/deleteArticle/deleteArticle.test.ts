@@ -1,21 +1,21 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import { DeleteArticle } from './deleteArticle.impl'
 
 describe('Test DeleteArticle', () => {
-  let articleRepository: ArticleAdapterInterface
+  let articleAdapter: ArticleAdapterInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn() as unknown as ArticleAdapterInterface
+    articleAdapter = jest.fn() as unknown as ArticleAdapterInterface
   })
 
   describe('Test execute', () => {
     it('Should delete Article correctly', async () => {
-      articleRepository.delete = jest.fn()
-      const useCase = new DeleteArticle(articleRepository)
+      articleAdapter.delete = jest.fn()
+      const useCase = new DeleteArticle(articleAdapter)
 
       await useCase.execute({ id: '1' })
 
-      expect(articleRepository.delete).toBeCalledWith('1')
+      expect(articleAdapter.delete).toBeCalledWith('1')
     })
   })
 })

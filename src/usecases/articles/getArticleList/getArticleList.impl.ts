@@ -1,4 +1,4 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
   GetArticleListInput,
   GetArticleListInterface,
@@ -6,14 +6,14 @@ import {
 } from './getArticleList.interface'
 
 class GetArticleList implements GetArticleListInterface {
-  constructor(private readonly articleRepository: ArticleAdapterInterface) {}
+  constructor(private readonly articleAdapter: ArticleAdapterInterface) {}
 
   public async execute(
     input: GetArticleListInput
   ): Promise<GetArticleListOutput> {
     const { limit, offset } = input
 
-    const { articles, total } = await this.articleRepository.findMany(
+    const { articles, total } = await this.articleAdapter.findMany(
       limit,
       offset
     )

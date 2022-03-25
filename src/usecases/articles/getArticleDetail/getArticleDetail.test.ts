@@ -1,11 +1,11 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import { GetArticleDetail } from './getArticleDetail.impl'
 
 describe('Test GetArticleDetail', () => {
-  let articleRepository: ArticleAdapterInterface
+  let articleAdapter: ArticleAdapterInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn() as unknown as ArticleAdapterInterface
+    articleAdapter = jest.fn() as unknown as ArticleAdapterInterface
   })
 
   describe('Test execute', () => {
@@ -18,15 +18,15 @@ describe('Test GetArticleDetail', () => {
         createdAt: '2022-03-18T08:45:21.963Z',
         updatedAt: '2022-03-18T09:00:00.000Z'
       }
-      articleRepository.findOne = jest.fn().mockResolvedValue(mockArticle)
-      const useCase = new GetArticleDetail(articleRepository)
+      articleAdapter.findOne = jest.fn().mockResolvedValue(mockArticle)
+      const useCase = new GetArticleDetail(articleAdapter)
 
       const expected = { article: mockArticle }
       const actual = await useCase.execute({
         id: '1'
       })
 
-      expect(articleRepository.findOne).toBeCalledWith('1')
+      expect(articleAdapter.findOne).toBeCalledWith('1')
       expect(actual).toStrictEqual(expected)
     })
   })

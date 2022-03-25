@@ -1,11 +1,11 @@
-import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleRepository.interface'
+import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import { UpdateArticle } from './updateArticle.impl'
 
 describe('Test UpdateArticle', () => {
-  let articleRepository: ArticleAdapterInterface
+  let articleAdapter: ArticleAdapterInterface
 
   beforeEach(() => {
-    articleRepository = jest.fn() as unknown as ArticleAdapterInterface
+    articleAdapter = jest.fn() as unknown as ArticleAdapterInterface
   })
 
   describe('Test execute', () => {
@@ -18,8 +18,8 @@ describe('Test UpdateArticle', () => {
         createdAt: '2022-03-18T08:45:21.963Z',
         updatedAt: '2022-03-18T09:00:00.000Z'
       }
-      articleRepository.update = jest.fn().mockResolvedValue(mockUpdatedArticle)
-      const useCase = new UpdateArticle(articleRepository)
+      articleAdapter.update = jest.fn().mockResolvedValue(mockUpdatedArticle)
+      const useCase = new UpdateArticle(articleAdapter)
 
       const expected = { article: mockUpdatedArticle }
       const actual = await useCase.execute({
@@ -27,7 +27,7 @@ describe('Test UpdateArticle', () => {
         updateData: { title: 'This is an update title' }
       })
 
-      expect(articleRepository.update).toBeCalledWith('1', {
+      expect(articleAdapter.update).toBeCalledWith('1', {
         title: 'This is an update title'
       })
       expect(actual).toStrictEqual(expected)
