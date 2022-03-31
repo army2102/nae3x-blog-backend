@@ -9,8 +9,42 @@ class ArticleAdapter implements ArticleAdapterInterface {
   public async findMany(
     limit: number,
     offset: number
-  ): Promise<{ articles: Article[]; total: number }> {
-    throw new Error('Not Implement')
+  ): Promise<{ articles: Article[]; hasNext: boolean }> {
+    const articles = await this.mongoCollection
+      .find({})
+      .skip(offset)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .map(({ id, title, content, thumbnail, updatedAt, createdAt }) => {
+        return new Article({
+          id,
+          title,
+          content,
+          thumbnail,
+          updatedAt,
+          createdAt
+        })
+      })
+      .toArray()
+
+    let hasNext = false
+    if (articles.length) {
+      const findNextResult = await this.mongoCollection
+        .find({})
+        .skip(offset * 2)
+        .limit(limit)
+        .sort({ createdAt: -1 })
+        .toArray()
+
+      // NOTE: Has next pagination if found article
+      console.log(findNextResult.length)
+      hasNext = findNextResult.length !== 0
+    }
+
+    return {
+      articles,
+      hasNext
+    }
   }
 
   public async findOne(id: string): Promise<Article> {

@@ -13,7 +13,7 @@ class GetArticleList implements GetArticleListInterface {
   ): Promise<GetArticleListOutput> {
     const { limit, offset } = input
 
-    const { articles, total } = await this.articleAdapter.findMany(
+    const { articles, hasNext } = await this.articleAdapter.findMany(
       limit,
       offset
     )
@@ -31,7 +31,7 @@ class GetArticleList implements GetArticleListInterface {
 
     return {
       articles: formattedArticles,
-      total
+      hasNext
     }
   }
 }

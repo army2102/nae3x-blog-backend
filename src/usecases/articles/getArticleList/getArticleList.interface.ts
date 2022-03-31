@@ -10,7 +10,7 @@ interface GetArticleListOutput {
     thumbnail: string
     createdAt: Date
   }[]
-  total: number
+  hasNext: boolean
 }
 
 interface GetArticleListInterface {

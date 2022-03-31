@@ -53,7 +53,7 @@ describe('Test getArticleList', () => {
             updatedAt: '2022-03-18T09:00:00.000Z'
           }
         ],
-        total: 10
+        hasNext: false
       }
       articleAdapter.findMany = jest.fn().mockResolvedValue(mockFindResult)
       const useCase = new GetArticleList(articleAdapter)
@@ -69,7 +69,7 @@ describe('Test getArticleList', () => {
             }
           }
         ),
-        total: 10
+        hasNext: false
       }
       const actual = await useCase.execute({
         limit: 5,
