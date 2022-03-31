@@ -1,4 +1,4 @@
-import { Collection, ObjectId, WithId } from 'mongodb'
+import { Collection, ObjectId, ReturnDocument, WithId } from 'mongodb'
 
 import { Article } from '@/entities/articles/articleEntity.impl'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
@@ -59,7 +59,21 @@ class ArticleAdapter implements ArticleAdapterInterface {
       thumbnail?: string | undefined
     }
   ): Promise<Article> {
-    throw new Error('Not Implement')
+    const updateResult = await this.mongoCollection.findOneAndUpdate(
+      { id },
+      {
+        $set: updateData
+      },
+      {
+        returnDocument: ReturnDocument.AFTER
+      }
+    )
+
+    if (!updateResult.value) {
+      throw new Error(`Error cannot find article with id: ${id}`)
+    }
+
+    return updateResult.value
   }
 
   public async deleteOne(id: string): Promise<void> {
