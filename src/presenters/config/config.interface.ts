@@ -1,9 +1,13 @@
 import { Static, Type } from '@sinclair/typebox'
 
 const ConfigSchema = Type.Object({
-  articleDbUri: Type.Optional(Type.String()),
+  articleDb: Type.Object({
+    uri: Type.String(),
+    dbName: Type.String(),
+    collectionName: Type.String()
+  }),
   apiPort: Type.Number(),
-  apiJwtSecret: Type.Optional(Type.String())
+  apiJwtSecret: Type.String()
 })
 
 type ConfigType = Static<typeof ConfigSchema>
