@@ -1,9 +1,11 @@
 import { v4 as uuidV4 } from 'uuid'
+import { Service } from 'typedi'
 
 import { Article } from '@/entities/articles/articleEntity.impl'
 
 import { ArticleFactoryInterface } from './articleFactory.interface'
 
+@Service()
 class ArticleFactory implements ArticleFactoryInterface {
   public create(title: string, content: string, thumbnail: string): Article {
     const article = new Article({

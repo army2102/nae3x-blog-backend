@@ -1,3 +1,5 @@
+import { Service } from 'typedi'
+
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
   CreateArticleInput,
@@ -6,6 +8,7 @@ import {
 } from './createArticle.interface'
 import { ArticleFactoryInterface } from './factory/articleFactory.interface'
 
+@Service()
 class CreateArticle implements CreateArticleInterface {
   constructor(
     private readonly articleFactory: ArticleFactoryInterface,

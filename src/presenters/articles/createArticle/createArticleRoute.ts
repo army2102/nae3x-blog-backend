@@ -1,13 +1,16 @@
-import fastify, { FastifyPluginAsync } from 'fastify'
+import { Container } from 'typedi'
+import { FastifyPluginAsync } from 'fastify'
 
-import { createArticleHandler } from './createArticleHandler.impl'
 import {
   createArticleHandlerInput,
   createArticleHandlerInputType,
   createArticleHandlerOutput
 } from './createArticleHandlerinterface'
+import { CreateArticleHandler } from './createArticleHandler.impl'
 
 const createArticleRoute: FastifyPluginAsync = async (fastify, options) => {
+  const handler = Container.get(CreateArticleHandler)
+
   fastify.route<{ Body: createArticleHandlerInputType }>({
     method: 'POST',
     url: '/',
@@ -17,7 +20,8 @@ const createArticleRoute: FastifyPluginAsync = async (fastify, options) => {
         201: createArticleHandlerOutput
       }
     },
-    handler: createArticleHandler
+    preHandler: [], // TODO: Add authentication
+    handler: handler.execute
   })
 }
 

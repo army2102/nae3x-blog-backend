@@ -1,8 +1,10 @@
+import { Service } from 'typedi'
 import { Collection, ObjectId, ReturnDocument, WithId } from 'mongodb'
 
 import { Article } from '@/entities/articles/articleEntity.impl'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 
+@Service()
 class ArticleAdapter implements ArticleAdapterInterface {
   constructor(private readonly mongoCollection: Collection<WithId<Article>>) {}
 
