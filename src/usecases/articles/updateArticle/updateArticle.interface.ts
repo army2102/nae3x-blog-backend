@@ -1,5 +1,3 @@
-import { Article } from '@/entities/articles/article'
-
 interface UpdateArticleInput {
   id: string
   updateData: {
