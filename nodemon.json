@@ -1,0 +1,16 @@
+{
+  "watch": [
+    "src",
+    "tsconfig.*.json",
+    ".env.development"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "src/**/*.test.ts"
+  ],
+  "exec": "ts-node -C ttypescript src/presenters/index.ts",
+  "env": {
+    "NODE_DEBUG": 9229,
+    "NODE_ENV": "development"
+  }
+}
