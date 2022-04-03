@@ -16,15 +16,14 @@ const InitContainer = async () => {
     .db(config.articleDb.dbName)
     .collection(config.articleDb.collectionName)
 
-  Container.set('Collection<WithId<Article>>', mongoCollection)
-  // TODO: Fix this
-  // Container.set('ArticleAdapterInterface', Container.get(ArticleAdapter))
-  Container.set('ArticleFactoryInterface', Container.get(ArticleFactory))
-  Container.set('CreateArticleInterface', Container.get(CreateArticle))
-  Container.set('GetArticleListInterface', Container.get(GetArticleList))
-  Container.set('GetArticleDetailInterface', Container.get(GetArticleDetail))
-  Container.set('UpdateArticleInterface', Container.get(UpdateArticle))
-  Container.set('DeleteArticleInterface', Container.get(DeleteArticle))
+  Container.set('ArticleDbDi', mongoCollection)
+  Container.set('ArticleAdapterDi', Container.get(ArticleAdapter))
+  Container.set('ArticleFactoryDi', Container.get(ArticleFactory))
+  Container.set('CreateArticleDi', Container.get(CreateArticle))
+  Container.set('GetArticleListDi', Container.get(GetArticleList))
+  Container.set('GetArticleDetailDi', Container.get(GetArticleDetail))
+  Container.set('UpdateArticleDi', Container.get(UpdateArticle))
+  Container.set('DeleteArticleDi', Container.get(DeleteArticle))
 }
 
 export { InitContainer }

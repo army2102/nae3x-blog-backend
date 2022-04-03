@@ -1,12 +1,15 @@
-import { Service } from 'typedi'
 import { Collection, ObjectId, ReturnDocument, WithId } from 'mongodb'
 
 import { Article } from '@/entities/articles/articleEntity.impl'
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
+import { Inject, Service } from 'typedi'
 
 @Service()
 class ArticleAdapter implements ArticleAdapterInterface {
-  constructor(private readonly mongoCollection: Collection<WithId<Article>>) {}
+  constructor(
+    @Inject('ArticleDbDi')
+    private readonly mongoCollection: Collection<WithId<Article>>
+  ) {}
 
   public async findMany(
     limit: number,
@@ -29,23 +32,23 @@ class ArticleAdapter implements ArticleAdapterInterface {
       })
       .toArray()
 
-    let hasNext = false
-    if (articles.length) {
-      const findNextResult = await this.mongoCollection
-        .find({})
-        .skip(offset * 2)
-        .limit(limit)
-        .sort({ createdAt: -1 })
-        .toArray()
-
-      // NOTE: Has next pagination if found article
-      console.log(findNextResult.length)
-      hasNext = findNextResult.length !== 0
+    if (articles.length === 0) {
+      return {
+        articles: [],
+        hasNext: false
+      }
     }
+
+    const findNextResult = await this.mongoCollection
+      .find({})
+      .skip(offset + limit)
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .toArray()
 
     return {
       articles,
-      hasNext
+      hasNext: findNextResult.length !== 0
     }
   }
 
@@ -109,7 +112,22 @@ class ArticleAdapter implements ArticleAdapterInterface {
       throw new Error(`Error cannot find article with id: ${id}`)
     }
 
-    return updateResult.value
+    const {
+      id: articleId,
+      title,
+      content,
+      thumbnail,
+      updatedAt,
+      createdAt
+    } = updateResult.value
+    return new Article({
+      id: articleId,
+      title,
+      content,
+      thumbnail,
+      updatedAt,
+      createdAt
+    })
   }
 
   public async deleteOne(id: string): Promise<void> {

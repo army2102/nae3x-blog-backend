@@ -1,4 +1,4 @@
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
 
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
@@ -11,7 +11,9 @@ import { ArticleFactoryInterface } from './factory/articleFactory.interface'
 @Service()
 class CreateArticle implements CreateArticleInterface {
   constructor(
+    @Inject('ArticleFactoryDi')
     private readonly articleFactory: ArticleFactoryInterface,
+    @Inject('ArticleAdapterDi')
     private readonly articleAdapter: ArticleAdapterInterface
   ) {}
 
