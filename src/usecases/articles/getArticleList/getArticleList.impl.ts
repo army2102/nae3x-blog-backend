@@ -1,12 +1,17 @@
+import { Inject, Service } from 'typedi'
+
 import { ArticleAdapterInterface } from '@/usecases/commons/adapters/articleAdapter.interface'
 import {
   GetArticleListInput,
   GetArticleListInterface,
   GetArticleListOutput
 } from './getArticleList.interface'
-
+@Service()
 class GetArticleList implements GetArticleListInterface {
-  constructor(private readonly articleAdapter: ArticleAdapterInterface) {}
+  constructor(
+    @Inject('ArticleAdapterDi')
+    private readonly articleAdapter: ArticleAdapterInterface
+  ) {}
 
   public async execute(
     input: GetArticleListInput

@@ -103,15 +103,13 @@ describe('Test ArticleAdapter', () => {
       }
       const actual = await adapter.findMany(5, 0)
 
-      console.log(actual)
-
       expect(mongoCollection.find).toHaveBeenNthCalledWith(1, {})
       expect(mockSkip).toHaveBeenNthCalledWith(1, 0)
       expect(mockLimit).toHaveBeenNthCalledWith(1, 5)
       expect(mockSort).toHaveBeenNthCalledWith(1, { createdAt: -1 })
       expect(mockToArray).toHaveBeenNthCalledWith(1)
       expect(mongoCollection.find).toHaveBeenNthCalledWith(2, {})
-      expect(mockSkip).toHaveBeenNthCalledWith(2, 0)
+      expect(mockSkip).toHaveBeenNthCalledWith(2, 5)
       expect(mockLimit).toHaveBeenNthCalledWith(2, 5)
       expect(mockSort).toHaveBeenNthCalledWith(2, { createdAt: -1 })
       expect(mockToArray).toHaveBeenNthCalledWith(2)
@@ -185,8 +183,6 @@ describe('Test ArticleAdapter', () => {
         hasNext: false
       }
       const actual = await adapter.findMany(5, 5)
-
-      console.log(actual)
 
       expect(mongoCollection.find).toHaveBeenNthCalledWith(1, {})
       expect(mockSkip).toHaveBeenNthCalledWith(1, 5)
@@ -277,6 +273,7 @@ describe('Test ArticleAdapter', () => {
     it('Should return Article correctly', async () => {
       const mockUpdateResult = {
         value: {
+          _id: new ObjectId(),
           id: '1',
           title: 'This is a title',
           content: 'This is a content',
@@ -290,7 +287,14 @@ describe('Test ArticleAdapter', () => {
         .mockResolvedValue(mockUpdateResult)
       const adapter = new ArticleAdapter(mongoCollection)
 
-      const expected = mockUpdateResult.value
+      const expected = new Article({
+        id: mockUpdateResult.value.id,
+        title: mockUpdateResult.value.title,
+        content: mockUpdateResult.value.content,
+        thumbnail: mockUpdateResult.value.thumbnail,
+        createdAt: mockUpdateResult.value.createdAt,
+        updatedAt: mockUpdateResult.value.updatedAt
+      })
       const actual = await adapter.update('1', {
         title: 'Updated title'
       })
@@ -306,6 +310,7 @@ describe('Test ArticleAdapter', () => {
           returnDocument: ReturnDocument.AFTER
         }
       )
+      expect(actual).toBeInstanceOf(Article)
       expect(actual).toStrictEqual(expected)
     })
 
