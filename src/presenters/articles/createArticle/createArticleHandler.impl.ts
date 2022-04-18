@@ -1,12 +1,17 @@
-import { Service } from 'typedi'
+import Container, { Inject, Service } from 'typedi'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { createArticleHandlerInputType } from './createArticleHandlerinterface'
 import { CreateArticleInterface } from '@/usecases/articles/createArticle/createArticle.interface'
+import { CreateArticle } from '@/usecases/articles/createArticle/createArticle.impl'
 
+// TODO: Write unittest
 @Service()
 class CreateArticleHandler {
-  constructor(private readonly createArticleUseCase: CreateArticleInterface) {}
+  constructor(
+    @Inject('CreateArticleDi')
+    private readonly createArticleUseCase: CreateArticleInterface
+  ) {}
 
   public async execute(
     request: FastifyRequest<{ Body: createArticleHandlerInputType }>,
@@ -14,13 +19,21 @@ class CreateArticleHandler {
   ) {
     const { title, thumbnail, content } = request.body
 
-    const articleId = await this.createArticleUseCase.execute({
+    // TODO: Make @Inject work
+    const createArticleUseCase = Container.get(CreateArticle)
+
+    const { id } = await createArticleUseCase.execute({
       title,
       thumbnail,
       content
     })
+    // const { id } = await this.createArticleUseCase.execute({
+    //   title,
+    //   thumbnail,
+    //   content
+    // })
 
-    reply.status(201).send({ articleId })
+    reply.status(201).send({ id })
   }
 }
 
