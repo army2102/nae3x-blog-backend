@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { config } from './config/config.impl'
 import { routes } from './routes'
 import { CreatServer } from './server'
-import { InitContainer } from './containers'
+import { InitContainer } from './di'
 
 InitContainer().then(() => {
   const server = CreatServer()
