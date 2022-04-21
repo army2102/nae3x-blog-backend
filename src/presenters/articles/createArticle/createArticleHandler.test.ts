@@ -1,17 +1,11 @@
-import 'reflect-metadata'
-import Container from 'typedi'
-
 import { CreateArticleInterface } from '@/usecases/articles/createArticle/createArticle.interface'
 import { CreateArticleHandler } from './createArticleHandler.impl'
-import { CreateArticle } from '@/usecases/articles/createArticle/createArticle.impl'
 
 describe('Test CreateArticleHandler', () => {
   let createArticleUseCase: CreateArticleInterface
 
   beforeEach(() => {
     createArticleUseCase = jest.fn() as unknown as CreateArticleInterface
-    // TODO: Make @Inject work
-    Container.set(CreateArticle, createArticleUseCase)
   })
 
   describe('Test execute', () => {
