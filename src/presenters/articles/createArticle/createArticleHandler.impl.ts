@@ -1,4 +1,4 @@
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import { createArticleHandlerInputType } from './createArticleHandlerinterface'
@@ -6,21 +6,25 @@ import { CreateArticleInterface } from '@/usecases/articles/createArticle/create
 
 @Service()
 class CreateArticleHandler {
-  constructor(private readonly createArticleUseCase: CreateArticleInterface) {}
+  constructor(
+    @Inject('CreateArticleDi')
+    public readonly createArticleUseCase: CreateArticleInterface
+  ) {}
 
-  public async execute(
+  // NOTE: Write like this to handle case createArticleUseCase is undefiend
+  execute = async (
     request: FastifyRequest<{ Body: createArticleHandlerInputType }>,
     reply: FastifyReply
-  ) {
+  ) => {
     const { title, thumbnail, content } = request.body
 
-    const articleId = await this.createArticleUseCase.execute({
+    const { id } = await this.createArticleUseCase.execute({
       title,
       thumbnail,
       content
     })
 
-    reply.status(201).send({ articleId })
+    reply.status(201).send({ id })
   }
 }
 
